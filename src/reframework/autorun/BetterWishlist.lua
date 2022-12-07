@@ -69,3 +69,21 @@ local function post_initializeBeforeVillage(_)
 end
 
 sdk.hook(WishListManagerType:get_method 'initializeBeforeVillage', function(_) end, post_initializeBeforeVillage)
+
+re.on_draw_ui(function()
+  if imgui.tree_node 'BetterWishlist' then
+    if imgui.tree_node 'Debug' then
+      if imgui.button 'Spawn Wishlist Notifications' then
+        log.debug 'Forcing wishlist notifications'
+        log.debug 'initializeBeforeVillage'
+        WishListManager:initializeBeforeVillage()
+        log.debug 'wishListAnaunceVillage'
+        WishListManager:wishListAnaunceVillage()
+      end
+      imgui.tree_pop() -- Debug
+    end
+    imgui.tree_pop() -- BetterWishlist
+  end
+end)
+
+log.info 'BetterWishlist loaded. Enjoy!'
