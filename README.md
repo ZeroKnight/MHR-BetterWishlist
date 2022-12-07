@@ -22,7 +22,7 @@ This mod requires [REFramework](https://www.nexusmods.com/monsterhunterrise/mods
 
 #### Manual Installation
 
-REFramework should already be installed. Extract the mod contents into your Monster Hunter Rise game directory, such that the `reframework` folder is ends up in the root of the game directory, like so:
+REFramework should already be installed. Extract the mod contents into your Monster Hunter Rise game directory, such that the `reframework` folder ends up in the root of the game directory, like so:
 
     <path/to/MonsterHunterRise>
     └───reframework
@@ -31,7 +31,7 @@ REFramework should already be installed. Extract the mod contents into your Mons
 
 # A Brief Preface — The Typical Experience
 
-In Monster Hunter Rise, some crafting recipes require not only a specific set of fixed materials to craft an item but can  also require an arbitrary amount of materials that the player may freely choose from a specific **category**. This is indeed a nice feature as it allows for more flexible crafting, however, the way that Capcom chose to handle wishlist notifications in lieu of this feature isn't the best. With this system, there are two types of wishlist notifications that a player can see when returning to the village: one for the primary materials, and one for the category materials. Let's take a look at them.
+In Monster Hunter Rise, some crafting recipes require not only a specific set of fixed materials to craft an item but can also require an arbitrary amount of materials that the player may freely choose from a specific **category**. This is indeed a nice feature as it allows for more flexible crafting, however, the way that Capcom chose to handle wishlist notifications in lieu of this feature isn't the best. With this system, there are two types of wishlist notifications that a player can see when returning to the village: one for the primary materials, and one for the category materials. Let's take a look at them.
 
 ## The "required materials gathered" notification
 
@@ -57,9 +57,9 @@ With how the current system works, a player is very likely to find themselves in
 
 ![missing_primary](https://user-images.githubusercontent.com/719733/206135445-d3722a33-769c-4175-a96e-6abb6b3c2688.png)
 
-This is the same situation that I'm sure may players (myself included) found themselves in during their early hours in Rise. It is quite easy for a new player to not know that there are indeed two separate wishlist notifications.
+This is the same situation that I'm sure many players (myself included) found themselves in during their early hours in Rise. It is quite easy for a new player to not know that there are indeed two separate wishlist notifications.
 
-So how is a player to know when they can *actually* craft an item with category materials? You wait until you get both notifications types at the same time, of course! That's right, the game actually sends *separate notifications* for when you acquire enough materials for their respective part of the recipe. This is unintuitive as it is, and to make matters worse, the  "materials gathered" message can appear several messages apart from the "material types gathered" message if you have a lot of things on your wishlist!
+So how is a player to know when they can *actually* craft an item with category materials? You wait until you get both notification types at the same time, of course! That's right, the game actually sends *separate notifications* when you acquire enough materials for their respective part of the recipe. This is unintuitive as it is, and to make matters worse, the "materials gathered" message can appear several messages apart from the "material types gathered" message if you have a lot of things on your wishlist!
 
 ![message_distance_example](https://user-images.githubusercontent.com/719733/206135490-6efcd6cb-69a5-418e-8816-272fce1afb9d.png)
 
