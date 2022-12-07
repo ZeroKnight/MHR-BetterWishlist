@@ -9,6 +9,11 @@ local WishListManagerType = sdk.find_type_definition 'snow.data.WishListManager'
 local tmo = sdk.to_managed_object
 local fmt = string.format
 
+local notifications_pruned = {
+  last = 0,
+  total = 0,
+}
+
 local function get_WishInfoList()
   return tmo(tmo(WishListManager:get_field '_WishInfoListData'):get_field '_WishInfoList')
 end
@@ -35,7 +40,8 @@ local function post_initializeBeforeVillage(_)
   end
 
   -- Collect truly complete wishlist items, i.e. primary *and* possible category materials
-  for i = 0, logwishlist:get_Count() - 1 do
+  local orig_count = logwishlist:get_Count()
+  for i = 0, orig_count - 1 do
     local wish = logwishlist[i]
     local id = wish:get_DataId()
     local isCategory = wish:isCategory()
@@ -61,6 +67,10 @@ local function post_initializeBeforeVillage(_)
   end
   log.debug(fmt('Found %d complete wishlist items', #complete_wishlist_items))
 
+  local pruned = orig_count - #complete_wishlist_items
+  notifications_pruned.last = pruned
+  notifications_pruned.total = notifications_pruned.total + pruned
+
   -- Rebuild LogWishList with only truly complete items
   logwishlist:Clear()
   for _, item in ipairs(complete_wishlist_items) do
@@ -72,6 +82,13 @@ sdk.hook(WishListManagerType:get_method 'initializeBeforeVillage', function(_) e
 
 re.on_draw_ui(function()
   if imgui.tree_node 'BetterWishlist' then
+    if notifications_pruned.last > 0 then
+      imgui.text(fmt('Pruned %d misleading wishlist notifications this visit. Nice!', notifications_pruned.last))
+    else
+      imgui.text 'No misleading wishlist notifications needed pruning this visit.'
+    end
+    imgui.text(fmt('Pruned %d notifications during this play session in total!', notifications_pruned.total))
+
     if imgui.tree_node 'Debug' then
       if imgui.button 'Spawn Wishlist Notifications' then
         log.debug 'Forcing wishlist notifications'
