@@ -1,0 +1,47 @@
+[size=5]A Brief Preface — The Typical Experience[/size]
+
+In Monster Hunter Rise, some crafting recipes require not only a specific set of fixed materials to craft an item but can also require an arbitrary amount of materials that the player may freely choose from a specific [b]category[/b]. This is indeed a nice feature as it allows for more flexible crafting, however, the way that Capcom chose to handle wishlist notifications in lieu of this feature isn't the best. With this system, there are two types of wishlist notifications that a player can see when returning to the village:
+
+[size=4]The "required materials gathered" notification[/size]
+
+[img]https://user-images.githubusercontent.com/719733/206134856-c6677651-48c5-43b9-9081-9165f0adf73c.png[/img]
+
+This notification is sent when you have all of the fixed, explicitly listed materials for an item recipe. For example:
+
+[img]https://user-images.githubusercontent.com/719733/206135202-0bd0c9a7-244c-4070-a295-02c3f56e6bc7.png[/img]
+
+[size=4]The "required material [b]types[/b] gathered" notification[/size]
+
+[img]https://user-images.githubusercontent.com/719733/206135104-bb17fa36-6439-4b0b-b3a9-c77ef1e9cb8c.png[/img]
+
+This notification is sent when you have a sufficient amount of materials from the material [b]category[/b] for an item recipe (if it has one). For example:
+
+[img]https://user-images.githubusercontent.com/719733/206135220-1e26d201-ab72-4ba3-90a9-18ea2255b5e7.png[/img]
+
+Simple enough, right? Sure, but unfortunately the game doesn't explain this connection to you when it introduces material types in crafting which, as I'll get into below, can lead to some confusion. Further still, this presentation method falls a bit short in practice.
+
+[size=5]Where Things Can Go Wrong[/size]
+
+With how the current system works, a player is very likely to find themselves in a situation where they have enough of the category materials for an item recipe but don't quite have everything needed for the primary, fixed portion of the recipe. Upon returning to the village, the player will be greeted with a "required material [b]types[/b] gathered" message. The first few times this happens, the player may be misled into believing that they can now craft this item, and so rush to the smithy only to find that they're still missing a primary material.
+
+[img]https://user-images.githubusercontent.com/719733/206135445-d3722a33-769c-4175-a96e-6abb6b3c2688.png[/img]
+
+This is the same situation that I'm sure many players (myself included) found themselves in during their early hours in Rise. It is quite easy for a new player to not know that there are indeed two separate wishlist notifications.
+
+So how is a player to know when they can [i]actually[/i] craft an item with category materials? You wait until you get both notification types at the same time, of course! That's right, the game actually sends [i]separate notifications[/i] for when you acquire enough materials for their respective part of the recipe. This is unintuitive as it is, and to make matters worse, the  "materials gathered" message can appear several messages apart from the "material types gathered" message if you have a lot of things on your wishlist!
+
+[img]https://user-images.githubusercontent.com/719733/206135490-6efcd6cb-69a5-418e-8816-272fce1afb9d.png[/img]
+
+While less likely, the opposite scenario can happen as well; a player can receive the "materials gathered" message, but not have enough category materials to craft the item. If we consider the scenario where a player doesn't meet either requirement, that means that two out of four possible outcomes for wishlist notifications for an item that requires category materials can be misleading. Since having one or the other requirement met is the most common outcome, that means that a wishlist notification is almost always dubious!
+
+[size=4]It Gets Worse...[/size]
+
+Even as a player learns of this distinction, these notifications transform from misleading into mere noise, as the player will see this notification every time that they return to the village, knowing full well that they cannot craft the item yet. After a while, it's possible that they'll not notice when they are finally able to craft the item, especially if you consider the potential distance between the notification pair.
+
+The current system greatly hamstrings the usefulness of the wishlist in addition to rendering it untrustworthy, to the point where some players will opt to not use it at all. This is an unacceptable state of affairs, so this mod aims to remedy these issues.
+
+[size=5]A Better Solution[/size]
+
+The ideal solution is obvious: only show wishlist notifications for items that are truly complete. That is, only the items for which you have all of the primary materials as well as enough category materials, if applicable; any other notification is filtered out. To make the notifications read nicely, only the "required materials gathered" messages are shown—also because some recipes have no category materials, of course.
+
+Put simply, if you get a notification for a wishlist item, you are guaranteed to be able to craft that item right then and there.
