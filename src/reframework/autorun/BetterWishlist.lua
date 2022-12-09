@@ -4,8 +4,6 @@
 -- Having enough of such parts for a wishlisted recipe is what triggers the
 -- "Required material **types** gathered" message.
 
-local WishListManager = sdk.get_managed_singleton 'snow.data.WishListManager'
-local WishListManagerType = sdk.find_type_definition 'snow.data.WishListManager'
 local tmo = sdk.to_managed_object
 local fmt = string.format
 
@@ -14,12 +12,24 @@ local notifications_pruned = {
   total = 0,
 }
 
+local WishListManager = setmetatable({}, {
+  __index = function(self, key)
+    if key == 'singleton' then
+      rawset(self, 'singleton', sdk.get_managed_singleton 'snow.data.WishListManager')
+      return rawget(self, 'singleton')
+    elseif key == 'type' then
+      rawset(self, 'type', sdk.find_type_definition 'snow.data.WishListManager')
+      return rawget(self, 'type')
+    end
+  end,
+})
+
 local function get_WishInfoList()
-  return tmo(tmo(WishListManager:get_field '_WishInfoListData'):get_field '_WishInfoList')
+  return tmo(tmo(WishListManager.singleton:get_field '_WishInfoListData'):get_field '_WishInfoList')
 end
 
 local function get_LogWishList()
-  return tmo(tmo(WishListManager:get_field '_LogWishList'):get_field '_DispLogWishList')
+  return tmo(tmo(WishListManager.singleton:get_field '_LogWishList'):get_field '_DispLogWishList')
 end
 
 local function post_initializeBeforeVillage(_)
@@ -34,7 +44,7 @@ local function post_initializeBeforeVillage(_)
     local id = wishinfolist[i]:get_DataId()
     if id ~= 0 then
       -- snow.data.NormalItemData.MaterialCategory.None = 0
-      local category = tmo(WishListManager:getWishDataCategory(i)):get_field '_Category'
+      local category = tmo(WishListManager.singleton:getWishDataCategory(i)):get_field '_Category'
       has_category[id] = category ~= 0
     end
   end
@@ -78,7 +88,7 @@ local function post_initializeBeforeVillage(_)
   end
 end
 
-sdk.hook(WishListManagerType:get_method 'initializeBeforeVillage', function(_) end, post_initializeBeforeVillage)
+sdk.hook(WishListManager.type:get_method 'initializeBeforeVillage', function(_) end, post_initializeBeforeVillage)
 
 re.on_draw_ui(function()
   if imgui.tree_node 'BetterWishlist' then
@@ -93,9 +103,9 @@ re.on_draw_ui(function()
       if imgui.button 'Spawn Wishlist Notifications' then
         log.debug 'Forcing wishlist notifications'
         log.debug 'initializeBeforeVillage'
-        WishListManager:initializeBeforeVillage()
+        WishListManager.singleton:initializeBeforeVillage()
         log.debug 'wishListAnaunceVillage'
-        WishListManager:wishListAnaunceVillage()
+        WishListManager.singleton:wishListAnaunceVillage()
       end
       imgui.tree_pop() -- Debug
     end
